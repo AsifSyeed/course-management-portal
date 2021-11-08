@@ -61,7 +61,6 @@ public class Student {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-
             if (rs != null) {
                 while (rs.next()) {
                     String email = rs.getString("s_email");
@@ -88,5 +87,22 @@ public class Student {
         }
 
         return loginVerified;
+    }
+    public void addSection (String u_email, int sec) {
+        String query = "update student set s_section = ? where s_email = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, String.valueOf(sec));
+            preparedStatement.setString(2, u_email);
+
+            preparedStatement.executeUpdate();
+
+            System.out.println("Section added successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

@@ -37,7 +37,12 @@ public class Main {
 
                     boolean loginVerification = std.studentLogin(email, pass);
                     if (loginVerification) {
+                        System.out.println("Enter 1 to select Section 1");
+                        System.out.println("Enter 2 to select Section 2\n");
 
+                        int sec = ps.nextInt();
+
+                        std.addSection(email, sec);
                     }
                 }
             }
