@@ -7,6 +7,7 @@ public class Main {
         Scanner ps = new Scanner(System.in);
 
         Student std = new Student();
+        Section sec = new Section();
 
         try {
             Connection connection = DriverManager.getConnection(
@@ -40,9 +41,12 @@ public class Main {
                         System.out.println("Enter 1 to select Section 1");
                         System.out.println("Enter 2 to select Section 2\n");
 
-                        int sec = ps.nextInt();
+                        sec.showSection();
 
-                        std.addSection(email, sec);
+                        int sectionNo = ps.nextInt();
+
+                        std.addSection(email, sectionNo);
+                        sec.addStudent(sectionNo);
                     }
                 }
             }
