@@ -88,6 +88,7 @@ public class Student {
 
         return loginVerified;
     }
+
     public void addSection (String u_email, int sec) {
         String query = "update student set s_section = ? where s_email = ?";
 

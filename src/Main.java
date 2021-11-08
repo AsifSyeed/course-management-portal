@@ -8,6 +8,7 @@ public class Main {
 
         Student std = new Student();
         Section sec = new Section();
+        Faculty fac = new Faculty();
 
         try {
             Connection connection = DriverManager.getConnection(
@@ -47,6 +48,19 @@ public class Main {
 
                         std.addSection(email, sectionNo);
                         sec.addStudent(sectionNo);
+                    }
+                }
+                else if (dashboardCheck == 3) {
+                    System.out.println("Enter Faculty email: ");
+                    String email = ps.nextLine();
+
+                    System.out.println("Enter Faculty password: ");
+                    String pass = ps.nextLine();
+
+                    boolean loginVerification = fac.facultyLogin(email, pass);
+                    if (loginVerification) {
+                        System.out.println("Enter 1 to select Section 1");
+                        System.out.println("Enter 2 to select Section 2\n");
                     }
                 }
             }

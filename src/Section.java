@@ -30,7 +30,7 @@ public class Section {
                     String time = rs.getString("sec_time");
                     int count = 9 - rs.getInt("sec_count");
 
-                    System.out.println(sectionName + "        " + time + "        " + count +" seat(s) remaining\n");
+                    System.out.println(sectionName + "        " + time + "        " + count +" seat(s) remaining");
                 }
             }
             else {
