@@ -1,8 +1,5 @@
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Student {
@@ -53,7 +50,43 @@ public class Student {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public boolean studentLogin(String u_email, String u_pass) {
+        boolean loginVerified = false;
 
 
+        try {
+            String query = "select s_email, s_pass from student";
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+
+            if (rs != null) {
+                while (rs.next()) {
+                    String email = rs.getString("s_email");
+                    String pass = rs.getString("s_pass");
+
+                    if (email.equals(u_email) && pass.equals(u_pass)) {
+                        loginVerified = true;
+                        break;
+                    }
+                }
+            }
+            else {
+                System.out.println("Student not found!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (loginVerified) {
+            System.out.println("Login Successful!");
+        }
+        else {
+            System.out.println("Invalid username or password. Please try again!");
+        }
+
+        return loginVerified;
     }
 }

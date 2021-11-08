@@ -28,6 +28,18 @@ public class Main {
                 if (dashboardCheck == 1) {
                     std.studentRegister();
                 }
+                else if (dashboardCheck == 2) {
+                    System.out.println("Enter email: ");
+                    String email = ps.nextLine();
+
+                    System.out.println("Enter password: ");
+                    String pass = ps.nextLine();
+
+                    boolean loginVerification = std.studentLogin(email, pass);
+                    if (loginVerification) {
+
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
