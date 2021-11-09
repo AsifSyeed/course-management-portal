@@ -3,19 +3,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Student {
-    Connection connection;
-
-    {
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/assignment2",
-                    "root",
-                    "root4421"
-            );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    static Connection con = DBConnection.getConnection();
 
     PreparedStatement preparedStatement;
     Scanner ps = new Scanner(System.in);
@@ -37,7 +25,7 @@ public class Student {
 
             String query = "insert into student (sid, s_name, s_email, s_pass) values (?, ?, ?, ?)";
 
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = con.prepareStatement(query);
 
             preparedStatement.setString(1, id);
             preparedStatement.setString(2, name);
@@ -58,7 +46,7 @@ public class Student {
         try {
             String query = "select s_email, s_pass from student";
 
-            Statement st = connection.createStatement();
+            Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
             if (rs != null) {
@@ -93,7 +81,7 @@ public class Student {
 
         try {
             String query = "insert into sectionstudentList (s_id, s_name, sectionNo) values (?, ?, ?)";
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, id);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, String.valueOf(sec));

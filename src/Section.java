@@ -1,19 +1,7 @@
 import java.sql.*;
 
 public class Section {
-    Connection connection;
-
-    {
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/assignment2",
-                    "root",
-                    "root4421"
-            );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    static Connection con = DBConnection.getConnection();
 
     PreparedStatement preparedStatement;
 
@@ -21,7 +9,7 @@ public class Section {
         try {
             String query = "select * from section";
 
-            Statement st = connection.createStatement();
+            Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
             if (rs != null) {
@@ -47,7 +35,7 @@ public class Section {
             String query = "update section set sec_count = sec_count + 1  where sec_name = ?";
 
             try {
-                preparedStatement = connection.prepareStatement(query);
+                preparedStatement = con.prepareStatement(query);
                 preparedStatement.setString(1, secName);
 
                 preparedStatement.executeUpdate();
@@ -61,7 +49,7 @@ public class Section {
             String query = "update section set sec_count = sec_count + 1  where sec_name = ?";
 
             try {
-                preparedStatement = connection.prepareStatement(query);
+                preparedStatement = con.prepareStatement(query);
                 preparedStatement.setString(1, secName);
 
                 preparedStatement.executeUpdate();

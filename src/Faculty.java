@@ -1,19 +1,8 @@
 import java.sql.*;
 
 public class Faculty {
-    Connection connection;
+    static Connection con = DBConnection.getConnection();
 
-    {
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/assignment2",
-                    "root",
-                    "root4421"
-            );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public boolean facultyLogin(String f_email, String f_pass) {
         boolean facultyVerified = false;
 
@@ -21,7 +10,7 @@ public class Faculty {
         try {
             String query = "select faculty_email, faculty_pass from faculty";
 
-            Statement st = connection.createStatement();
+            Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
             if (rs != null) {
@@ -34,9 +23,8 @@ public class Faculty {
                         break;
                     }
                 }
-            }
-            else {
-                System.out.println("Faculty not found!");
+            } else {
+                System.out.println("Student not found!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,19 +32,19 @@ public class Faculty {
 
         if (facultyVerified) {
             System.out.println("Faculty login Successful!\n");
-        }
-        else {
+        } else {
             System.out.println("Invalid Faculty username or password. Please try again!");
         }
 
         return facultyVerified;
     }
-    public void showSection (int secNo) {
+
+    public void showSection(int secNo) {
         if (secNo == 1) {
             System.out.println("Section-01");
             try {
                 String query = "select s_name, s_id from sectionstudentList where sectionNo = 1";
-                Statement st = connection.createStatement();
+                Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(query);
 
                 if (rs != null) {
@@ -70,12 +58,11 @@ public class Faculty {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-        else if (secNo == 2) {
+        } else if (secNo == 2) {
             System.out.println("Section-02");
             try {
                 String query = "select s_name, s_id from sectionstudentList where sectionNo = 2";
-                Statement st = connection.createStatement();
+                Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(query);
 
                 if (rs != null) {
@@ -89,8 +76,7 @@ public class Faculty {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             System.out.println("Please select a valid section!");
         }
     }
