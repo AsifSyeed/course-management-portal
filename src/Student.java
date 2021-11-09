@@ -89,19 +89,19 @@ public class Student {
         return loginVerified;
     }
 
-    public void addSection (String u_email, int sec) {
-        String query = "update student set s_section = ? where s_email = ?";
+    public void addSection (String id, String name, int sec) {
 
         try {
+            String query = "insert into sectionstudentList (s_id, s_name, sectionNo) values (?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, String.valueOf(sec));
-            preparedStatement.setString(2, u_email);
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, String.valueOf(sec));
 
             preparedStatement.executeUpdate();
-
             System.out.println("Section added successfully!");
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
 

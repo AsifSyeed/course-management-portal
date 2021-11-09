@@ -39,6 +39,32 @@ public class Main {
 
                     boolean loginVerification = std.studentLogin(email, pass);
                     if (loginVerification) {
+
+                        String u_id = "";
+                        String u_name = "";
+
+                        try {
+                            String query = "select sid, s_name, s_email from student";
+
+                            Statement st = connection.createStatement();
+                            ResultSet rs = st.executeQuery(query);
+
+                            if (rs != null) {
+                                while (rs.next()) {
+                                    String id = rs.getString("sid");
+                                    String name = rs.getString("s_name");
+                                    String std_email = rs.getString("s_email");
+
+                                    if (std_email.equals(email)) {
+                                        u_id = id;
+                                        u_name = name;
+                                    }
+                                }
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
                         System.out.println("Enter 1 to select Section 1");
                         System.out.println("Enter 2 to select Section 2\n");
 
@@ -46,7 +72,9 @@ public class Main {
 
                         int sectionNo = ps.nextInt();
 
-                        std.addSection(email, sectionNo);
+
+
+                        std.addSection(u_id, u_name, sectionNo);
                         sec.addStudent(sectionNo);
                     }
                 }
@@ -61,6 +89,10 @@ public class Main {
                     if (loginVerification) {
                         System.out.println("Enter 1 to select Section 1");
                         System.out.println("Enter 2 to select Section 2\n");
+
+                        int secNo = ps.nextInt();
+
+                        fac.showSection(secNo);
                     }
                 }
             }

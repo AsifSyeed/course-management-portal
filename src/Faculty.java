@@ -51,4 +51,47 @@ public class Faculty {
 
         return facultyVerified;
     }
+    public void showSection (int secNo) {
+        if (secNo == 1) {
+            System.out.println("Section-01");
+            try {
+                String query = "select s_name, s_id from sectionstudentList where sectionNo = 1";
+                Statement st = connection.createStatement();
+                ResultSet rs = st.executeQuery(query);
+
+                if (rs != null) {
+                    while (rs.next()) {
+                        String name = rs.getString("s_name");
+                        String id = rs.getString("s_id");
+
+                        System.out.println(name + "         " + id);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (secNo == 2) {
+            System.out.println("Section-02");
+            try {
+                String query = "select s_name, s_id from sectionstudentList where sectionNo = 2";
+                Statement st = connection.createStatement();
+                ResultSet rs = st.executeQuery(query);
+
+                if (rs != null) {
+                    while (rs.next()) {
+                        String name = rs.getString("s_name");
+                        String id = rs.getString("s_id");
+
+                        System.out.println(name + "         " + id);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("Please select a valid section!");
+        }
+    }
 }
